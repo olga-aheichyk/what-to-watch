@@ -2,7 +2,7 @@
 //   test: string;
 // }
 
-import Logo from '../logo/logo';
+import Logo from '../../components/logo/logo';
 
 function ReviewScreen(): JSX.Element {
   return (

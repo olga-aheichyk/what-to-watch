@@ -1,11 +1,13 @@
-import Card from '../card/card';
-import Logo from '../logo/logo';
+import { Film } from '../../types/film';
+import FilmsList from '../../components/films-list/films-list';
+import Logo from '../../components/logo/logo';
 
-// type MyListScreenProps = {
-//   test: string;
-// }
+type MyListScreenProps = {
+  films: Film[];
+}
 
-function MyListScreen(): JSX.Element {
+function MyListScreen(props: MyListScreenProps): JSX.Element {
+  const { films } = props;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -13,7 +15,7 @@ function MyListScreen(): JSX.Element {
           <Logo />
         </div>
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{films.length}</span></h1>
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -29,17 +31,7 @@ function MyListScreen(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <div className="catalog__films-list">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
+        <FilmsList films={films} />
       </section>
 
       <footer className="page-footer">

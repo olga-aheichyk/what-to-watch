@@ -1,15 +1,18 @@
-import Card from '../card/card';
-import Logo from '../logo/logo';
-import SvgSprite from '../svg-sprite/svg-sprite';
+import { Film } from '../../types/film';
+import FilmsList from '../../components/films-list/films-list';
+import Logo from '../../components/logo/logo';
+import MyListButton from '../../components/my-list-button/my-list-button';
+import SvgSprite from '../../components/svg-sprite/svg-sprite';
 
 type MainScreenProps = {
   title: string;
   genre: string;
   year: number;
+  films: Film[],
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
-  const {title, genre, year} = props;
+  const {title, genre, year, films} = props;
   return (
     <>
       <SvgSprite />
@@ -57,13 +60,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <MyListButton />
               </div>
             </div>
           </div>
@@ -107,47 +104,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-
-            <Card />
-          </div>
+          <FilmsList films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { Film } from '../../types/film';
 import FilmScreen from '../film-screen/film-screen';
 import LoginScreen from '../login-screen/login-screen';
 import MainScreen from '../main-screen/main-screen';
@@ -13,19 +14,25 @@ const TITLE = 'The Grand Budapest Hotel';
 const GENRE = 'Drama';
 const YEAR = 2012;
 
-function App(): JSX.Element {
+type AppProps = {
+  films: Film[];
+}
+
+function App(props: AppProps): JSX.Element {
+  const { films } = props;
+  const favoriteFilms: Film[] = films.filter((film) => film.isFavorite);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Root} element={<MainScreen title={TITLE} genre={GENRE} year={YEAR} />} />
+        <Route path={AppRoute.Root} element={<MainScreen films={films} title={TITLE} genre={GENRE} year={YEAR} />} />
         <Route path={AppRoute.Login} element={<LoginScreen />} />
         <Route path={AppRoute.MyList} element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-            <MyListScreen />
+          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <MyListScreen films={favoriteFilms} />
           </PrivateRoute>
         }
         />
-        <Route path={AppRoute.Film} element={<FilmScreen />} />
+        <Route path={AppRoute.Film} element={<FilmScreen films={films.slice(1, 4)} selectedFilm={films[3]} />} />
         <Route path={AppRoute.Review} element={<ReviewScreen />} />
         <Route path={AppRoute.Player} element={<PlayerScreen />} />
         <Route path='*' element={<NotFoundScreen />} />
