@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
+import { AppRoute } from '../../const';
 import { Film } from '../../types/film';
 
 type FilmScreenProps = {
@@ -67,7 +69,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                   <span>Play</span>
                 </button>
                 <MyListButton />
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to={AppRoute.Review} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -104,8 +106,6 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
 
               <div className="film-card__text">
                 <p>{description}</p>
-
-                <p>Gustave prides himself on providing first-className service to the hotel&apos; s guests, including satisfying the sexual needs of the many elderly women who stay there.When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
 
                 <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
 
