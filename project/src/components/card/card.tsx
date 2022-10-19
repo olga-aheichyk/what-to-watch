@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
 import { Film } from '../../types/film';
 
 type CardProps = {
@@ -12,7 +11,8 @@ function Card(props: CardProps): JSX.Element {
     film:
     {
       name,
-      previewImage
+      previewImage,
+      id,
     },
   } = props;
 
@@ -27,7 +27,7 @@ function Card(props: CardProps): JSX.Element {
   };
 
   return (
-    <Link to={AppRoute.Film}>
+    <Link to={`films/${id}`}>
       <article
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

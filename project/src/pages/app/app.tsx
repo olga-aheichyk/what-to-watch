@@ -20,6 +20,7 @@ type AppProps = {
 
 function App(props: AppProps): JSX.Element {
   const { films } = props;
+
   const favoriteFilms: Film[] = films.filter((film) => film.isFavorite);
   return (
     <BrowserRouter>
@@ -32,7 +33,7 @@ function App(props: AppProps): JSX.Element {
           </PrivateRoute>
         }
         />
-        <Route path={AppRoute.Film} element={<FilmScreen films={films.slice(1, 4)} selectedFilm={films[3]} />} />
+        <Route path={AppRoute.Film} element={<FilmScreen films={films} />} />
         <Route path={AppRoute.Review} element={<ReviewScreen />} />
         <Route path={AppRoute.Player} element={<PlayerScreen />} />
         <Route path='*' element={<NotFoundScreen />} />

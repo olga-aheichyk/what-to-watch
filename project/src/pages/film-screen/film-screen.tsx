@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
@@ -7,25 +7,36 @@ import { Film } from '../../types/film';
 
 type FilmScreenProps = {
   films: Film[];
-  selectedFilm: Film;
 }
 
 function FilmScreen(props: FilmScreenProps): JSX.Element {
-  const { films,
-    selectedFilm: {
-      name,
-      backgroundImage,
-      posterImage,
-      description,
-      rating,
-      scoresCount,
-      director,
-      starring,
-      genre,
-      released,
-      //isFavorite,
-    }
-  } = props;
+  const { films } = props;
+
+  const { id } = useParams();
+
+  const selectedFilm: Film | undefined = films.find((film) => film.id === Number(id));
+
+  if (selectedFilm === undefined || id === undefined) {
+    return (
+      <>
+      </>
+    );
+  }
+
+  const {
+    name,
+    backgroundImage,
+    posterImage,
+    description,
+    rating,
+    scoresCount,
+    director,
+    starring,
+    genre,
+    released
+    //isFavorite,
+  } = selectedFilm;
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -69,7 +80,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                   <span>Play</span>
                 </button>
                 <MyListButton />
-                <Link to={AppRoute.Review} className="btn film-card__button">Add review</Link>
+                <Link to={AppRoute.Review.replace(':id', id)} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
